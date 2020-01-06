@@ -1,5 +1,5 @@
 import strutils
-
+import os
 proc deletesign(s: string, sn: int): string = 
     var fstr: string
     var slen = s.len()
@@ -9,7 +9,11 @@ proc deletesign(s: string, sn: int): string =
 
 var f: File
 var filename: string = "file.md"
-let hf = open("$1.html" % [filename], fmAppend)
+var outputfilename = "$1.html" % [filename]
+if existsFile(outputfilename) == true:
+    removeFile(outputfilename)
+
+let hf = open(outputfilename, fmAppend)
 hf.write("""
 <html>
 <head>
