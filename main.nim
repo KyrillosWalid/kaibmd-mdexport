@@ -9,7 +9,7 @@ proc deletesign(s: string, sn: int): string =
 
 var f: File
 var filename: string = "file.md"
-let hf = open("index.html", fmAppend)
+let hf = open("$1.html" % [filename], fmAppend)
 hf.write("""
 <html>
 <head>
