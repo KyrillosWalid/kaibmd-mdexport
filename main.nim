@@ -49,6 +49,12 @@ if open(f, filename):
                     hf.write("<h6>")
                     var ffline = deletesign(line,6)
                     hf.write("$1 </h6>\n" % [ffline])
+                of "-":
+                    hf.write("<ul>")
+                    hf.write("<li>")
+                    var ffline = deletesign(line,1)
+                    hf.write("$1 </li>\n" % [ffline])
+                    hf.write("</ul>")
     except EOFError:
         echo "Done!"
 
