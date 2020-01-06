@@ -1,5 +1,6 @@
 import strutils
 import os
+
 proc deletesign(s: string, sn: int): string = 
     var fstr: string
     var slen = s.len()
@@ -28,6 +29,7 @@ if open(f, filename):
             var line = f.readLine()
             var aline = line.split(' ')
             var fline: string = aline[0]
+            var sline: string = aline[1]
             case fline:
                 of "#":
                     hf.write("<h1>")
@@ -57,8 +59,46 @@ if open(f, filename):
                     hf.write("<ul>")
                     hf.write("<li>")
                     var ffline = deletesign(line,1)
-                    hf.write("$1 </li>\n" % [ffline])
-                    hf.write("</ul>")
+                    case sline:
+                        of "#":
+                            hf.write("<h1>")
+                            var ffline = deletesign(ffline,1+1)
+                            hf.write("$1 </h1>\n" % [ffline])
+                            hf.write("</li>\n")
+                            hf.write("</ul>")
+                        of "##":
+                            hf.write("<h2>")
+                            var ffline = deletesign(ffline,2+1)
+                            hf.write("$1 </h2>\n" % [ffline])
+                            hf.write("</li>\n")
+                            hf.write("</ul>")
+                        of "###":
+                            hf.write("<h3>")
+                            var ffline = deletesign(ffline,3+1)
+                            hf.write("$1 </h3>\n" % [ffline])
+                            hf.write("</li>\n")
+                            hf.write("</ul>")
+                        of "####":
+                            hf.write("<h4>")
+                            var ffline = deletesign(ffline,4+1)
+                            hf.write("$1 </h4>\n" % [ffline])
+                            hf.write("</li>\n")
+                            hf.write("</ul>")
+                        of "#####":
+                            hf.write("<h5>")
+                            var ffline = deletesign(ffline,5+1)
+                            hf.write("$1 </h5>\n" % [ffline])
+                            hf.write("</li>\n")
+                            hf.write("</ul>")
+                        of "######":
+                            hf.write("<h6>")
+                            var ffline = deletesign(ffline,6+1)
+                            hf.write("$1 </h6>\n" % [ffline])
+                            hf.write("</li>\n")
+                            hf.write("</ul>")
+                        of "":
+                            hf.write("$1 </li>\n" % [ffline])
+                            hf.write("</ul>")
     except EOFError:
         echo "Done!"
 
