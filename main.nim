@@ -28,9 +28,7 @@ if open(f, filename):
         while true:
             var line = f.readLine()
             var aline = line.split(' ')
-            var fline: string = aline[0]
-            var sline: string = aline[1]
-            case fline:
+            case aline[0]:
                 of "#":
                     hf.write("<h1>")
                     var ffline = deletesign(line,1)
@@ -55,11 +53,18 @@ if open(f, filename):
                     hf.write("<h6>")
                     var ffline = deletesign(line,6)
                     hf.write("$1 </h6>\n" % [ffline])
+                of "![]":
+                    hf.write("""<img src="""")
+                    case aline[1]:
+                        of "(":
+                            hf.write(aline[2],"""  ">  """)
+
                 of "-":
                     hf.write("<ul>")
                     hf.write("<li>")
-                    var ffline = deletesign(line,1)
-                    case sline:
+                    var ulline = line
+                    var ffline = deletesign(ulline,1)
+                    case aline[1]:
                         of "#":
                             hf.write("<h1>")
                             var ffline = deletesign(ffline,1+1)
